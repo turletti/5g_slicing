@@ -46,7 +46,7 @@ http_version: 2
 ############## SBI Interfaces
 nfs:
   smf:
-    host: oai-smf-slice1
+    host: oai-smf-slice12
     sbi:
       port: 8080
       api_version: v1
@@ -61,7 +61,7 @@ nfs:
       api_version: v1
       interface_name: eth0
   upf:
-    host: oai-upf
+    host: oai-upf-slice12
     sbi:
       port: 8080
       api_version: v1
@@ -89,7 +89,7 @@ snssais:
   - &slice1
     sst: 1
     sd: 000001 # in hex
-  - &slice3
+  - &slice2
     sst: 130
     sd: 000001 # in hex
 
@@ -107,7 +107,7 @@ smf:
       - sNssai: *slice1
         dnnSmfInfoList:
           - dnn: "oai"
-      - sNssai: *slice3
+      - sNssai: *slice2
         dnnSmfInfoList:
           - dnn: "oai.ipv4"
   local_subscription_infos:
@@ -117,7 +117,7 @@ smf:
         5qi: 5
         session_ambr_ul: "50Mbps"
         session_ambr_dl: "100Mbps"
-    - single_nssai: *slice3
+    - single_nssai: *slice2
       dnn: "oai.ipv4"
       qos_profile:
         5qi: 6
@@ -134,7 +134,7 @@ upf:
       - sNssai: *slice1
         dnnUpfInfoList:
           - dnn: "oai"
-      - sNssai: *slice3
+      - sNssai: *slice2
         dnnUpfInfoList:
           - dnn: "oai.ipv4"
 
@@ -142,7 +142,7 @@ upf:
 dnns:
   - dnn: "oai"
     pdu_session_type: "IPV4"
-    ipv4_subnet: "12.2.1.0/25"
+    ipv4_subnet: "12.2.1.0/24"
   - dnn: "oai.ipv4"
     pdu_session_type: "IPV4"
-    ipv4_subnet: "12.1.1.0/25"
+    ipv4_subnet: "12.1.1.0/24"

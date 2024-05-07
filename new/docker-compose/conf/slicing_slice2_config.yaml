@@ -46,7 +46,7 @@ http_version: 2
 ############## SBI Interfaces
 nfs:
   smf:
-    host: oai-smf-slice1
+    host: oai-smf-slice2
     sbi:
       port: 8080
       api_version: v1
@@ -78,51 +78,37 @@ nfs:
       interface_name: eth0
       port: 2152
   pcf:
-    host: oai-pcf-slice1
+    host: oai-pcf-slice2
     sbi:
       port: 8080
       api_version: v1
-      interface_name: eth0
-
+      interface_name: eth0   
 # anchor is set to re-use slice config in SMF
 snssais:
-  - &slice1
+  - &slice2
     sst: 1
-    sd: 000001 # in hex
-  - &slice3
-    sst: 130
-    sd: 000001 # in hex
 
 smf:
   support_features:
     use_local_subscription_info: yes # Use infos from local_subscription_info or from UDM
     use_local_pcc_rules: yes # Use infos from local_pcc_rules or from PCF
   ue_dns:
-    primary_ipv4: "138.96.0.210"
+    primary_ipv4: "172.21.3.100"
     secondary_ipv4: "8.8.8.8"
   # the DNN you configure here should be configured in "dnns"
   # follows the SmfInfo datatype from 3GPP TS 29.510
   smf_info:
     sNssaiSmfInfoList:
-      - sNssai: *slice1
+      - sNssai: *slice2
         dnnSmfInfoList:
           - dnn: "oai"
-      - sNssai: *slice3
-        dnnSmfInfoList:
-          - dnn: "oai.ipv4"
   local_subscription_infos:
-    - single_nssai: *slice1
+    - single_nssai: *slice2
       dnn: "oai"
       qos_profile:
         5qi: 5
-        session_ambr_ul: "50Mbps"
-        session_ambr_dl: "100Mbps"
-    - single_nssai: *slice3
-      dnn: "oai.ipv4"
-      qos_profile:
-        5qi: 6
-        session_ambr_ul: "100Mbps"
-        session_ambr_dl: "200Mbps"
+        session_ambr_ul: "20Mbps"
+        session_ambr_dl: "400Mbps"
 
 upf:
   support_features:
@@ -131,18 +117,12 @@ upf:
   remote_n6_gw: localhost      # Dummy host since simple-switch does not use N6 GW
   upf_info:
     sNssaiUpfInfoList:
-      - sNssai: *slice1
+      - sNssai: *slice2
         dnnUpfInfoList:
           - dnn: "oai"
-      - sNssai: *slice3
-        dnnUpfInfoList:
-          - dnn: "oai.ipv4"
 
 ## DNN configuration
 dnns:
   - dnn: "oai"
     pdu_session_type: "IPV4"
-    ipv4_subnet: "12.2.1.0/25"
-  - dnn: "oai.ipv4"
-    pdu_session_type: "IPV4"
-    ipv4_subnet: "12.1.1.0/25"
+    ipv4_subnet: "12.1.1.128/25"
