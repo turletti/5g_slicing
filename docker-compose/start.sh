@@ -26,7 +26,7 @@ docker-compose -f docker-compose-slicing-rfsim.yaml up -d oai-gnb oai-nr-ue4
 ../ci-scripts/checkUePduSession.py --container_name rfsim5g-oai-nr-ue4
 docker-compose -f docker-compose-slicing-rfsim.yaml ps -a	
 docker logs oai-amf 2>&1 | grep --color=never info | tail -20
-echo "wait 10s before pinging EXT-DN from UEs"
+echo "wait 10s before pinging EXT-DN from UEs"; sleep 10
 echo "UE 1, slice 1:"; docker exec rfsim5g-oai-nr-ue1 ping -I oaitun_ue1 -c 1 192.168.70.145
 echo "UE 2, slice 2:"; docker exec rfsim5g-oai-nr-ue2 ping -I oaitun_ue1 -c 1 192.168.70.145
 echo "UE 3, slice 3:"; docker exec rfsim5g-oai-nr-ue3 ping -I oaitun_ue1 -c 1 192.168.70.145
