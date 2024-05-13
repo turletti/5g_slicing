@@ -36,6 +36,7 @@
 # Log level for all the NFs
 log_level:
   general: debug
+#  general: info
 
 # If you enable registration, the other NFs will use the NRF discovery mechanism
 register_nf:
@@ -77,12 +78,12 @@ nfs:
     n9:
       interface_name: eth0
       port: 2152
-  pcf:
-    host: oai-pcf-slice1
-    sbi:
-      port: 8080
-      api_version: v1
-      interface_name: eth0
+#  pcf:
+#    host: oai-pcf-slice1
+#    sbi:
+#      port: 8080
+#      api_version: v1
+#      interface_name: eth0
 
 # anchor is set to re-use slice config in SMF
 snssais:
@@ -99,7 +100,9 @@ smf:
     use_local_pcc_rules: yes # Use infos from local_pcc_rules or from PCF
   ue_dns:
     primary_ipv4: "138.96.0.210"
+    primary_ipv6: "2001:4860:4860::8888"
     secondary_ipv4: "8.8.8.8"
+    secondary_ipv6: "2001:4860:4860::8888"
   # the DNN you configure here should be configured in "dnns"
   # follows the SmfInfo datatype from 3GPP TS 29.510
   smf_info:
@@ -128,7 +131,9 @@ upf:
   support_features:
     enable_bpf_datapath: no    # If "on": BPF is used as datapath else simpleswitch is used, DEFAULT= off
     enable_snat: yes           # If "on": Source natting is done for UE, DEFAULT= off
-  remote_n6_gw: localhost      # Dummy host since simple-switch does not use N6 GW
+# WARNING: On rocky linux 9, using localhost below generates issue. Use 127.0.0.1 instead    
+#  remote_n6_gw: localhost      # Dummy host since simple-switch does not use N6 GW
+  remote_n6_gw: 127.0.0.1      # Dummy host since simple-switch does not use N6 GW
   upf_info:
     sNssaiUpfInfoList:
       - sNssai: *slice1
