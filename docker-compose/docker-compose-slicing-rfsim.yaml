@@ -7,8 +7,9 @@ services:
         environment: 
             RFSIMULATOR: server
             USE_ADDITIONAL_OPTIONS: --sa -E --rfsim --log_config.global_log_options level,nocolor,time
+            ASAN_OPTIONS: detect_leaks=0
         volumes:
-            - ./rfsim-conf/gnb.conf:/opt/oai-gnb/etc/gnb.conf
+            - ./rfsim-conf/gnb-new.conf:/opt/oai-gnb/etc/gnb.conf
         networks:
             public_net:
                 ipv4_address: 192.168.70.153
@@ -24,7 +25,7 @@ services:
         container_name: rfsim5g-oai-nr-ue1
         environment: 
             RFSIMULATOR: 192.168.70.153
-            USE_ADDITIONAL_OPTIONS: -E --sa --rfsim -r 106 --numerology 1 -C 3619200000 --nokrnmod --log_config.global_log_options level,nocolor,time
+            USE_ADDITIONAL_OPTIONS: -E --sa --rfsim -r 106 --numerology 1 -C 3619200000 --log_config.global_log_options level,nocolor,time
         depends_on:
             - oai-gnb
         volumes:
@@ -44,7 +45,7 @@ services:
         container_name: rfsim5g-oai-nr-ue2
         environment: 
             RFSIMULATOR: 192.168.70.153
-            USE_ADDITIONAL_OPTIONS: -E --sa --rfsim -r 106 --numerology 1 -C 3619200000 --nokrnmod --log_config.global_log_options level,nocolor,time
+            USE_ADDITIONAL_OPTIONS: -E --sa --rfsim -r 106 --numerology 1 -C 3619200000 --log_config.global_log_options level,nocolor,time
         depends_on:
             - oai-gnb
         volumes:
@@ -64,7 +65,7 @@ services:
         container_name: rfsim5g-oai-nr-ue3 
         environment: 
             RFSIMULATOR: 192.168.70.153
-            USE_ADDITIONAL_OPTIONS: -E --sa --rfsim -r 106 --numerology 1 -C 3619200000 --nokrnmod --log_config.global_log_options level,nocolor,time
+            USE_ADDITIONAL_OPTIONS: -E --sa --rfsim -r 106 --numerology 1 -C 3619200000 --log_config.global_log_options level,nocolor,time
         depends_on:
             - oai-gnb
         volumes:
@@ -84,7 +85,7 @@ services:
         container_name: rfsim5g-oai-nr-ue4
         environment: 
             RFSIMULATOR: 192.168.70.153
-            USE_ADDITIONAL_OPTIONS: -E --sa --rfsim -r 106 --numerology 1 -C 3619200000 --nokrnmod --log_config.global_log_options level,nocolor,time
+            USE_ADDITIONAL_OPTIONS: -E --sa --rfsim -r 106 --numerology 1 -C 3619200000 --log_config.global_log_options level,nocolor,time
         depends_on:
             - oai-gnb
         volumes:

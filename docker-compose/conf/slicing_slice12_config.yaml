@@ -118,14 +118,14 @@ smf:
       dnn: "oai"
       qos_profile:
         5qi: 5
-        session_ambr_ul: "50Mbps"
-        session_ambr_dl: "100Mbps"
+        session_ambr_ul: "10Mbps"
+        session_ambr_dl: "20Mbps"
     - single_nssai: *slice2
       dnn: "oai.ipv4"
       qos_profile:
         5qi: 6
-        session_ambr_ul: "100Mbps"
-        session_ambr_dl: "200Mbps"
+        session_ambr_ul: "5Mbps"
+        session_ambr_dl: "10Mbps"
 
 upf:
   support_features:
